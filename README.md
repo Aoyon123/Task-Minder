@@ -15,11 +15,11 @@ A full-stack task management application built with Laravel (backend) and React 
 ✅ PHPUnit Testing
 
 Installation & Setup
-1. Clone the Repository
+Clone the Repository
 git clone https://github.com/Aoyon123/task-minder.git
 cd task-minder
 
-2. Backend Setup
+Backend Setup
 # Install PHP dependencies
 composer install
 
@@ -52,11 +52,11 @@ QUEUE_CONNECTION=database
 
 
 
-3. Database Migration
+Database Migration
 # Run migrations
 php artisan migrate
 
-4. Database Seeding
+Database Seeding
 # Seed the database with sample data
 php artisan db:seed
 
@@ -64,11 +64,12 @@ php artisan db:seed
 php artisan db:seed --class=UserSeeder
 php artisan db:seed --class=TaskSeeder
 
-5. Frontend Setup
+
+Frontend Setup
 # Install Node dependencies
 npm install
 
-6. Queue Configuration
+Queue Configuration
 # Create queue table (if not already migrated)
 php artisan queue:table
 php artisan migrate
