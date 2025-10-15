@@ -16,8 +16,8 @@ A full-stack task management application built with Laravel (backend) and React 
 
 Installation & Setup
 Clone the Repository
-git clone https://github.com/Aoyon123/task-minder.git
-cd task-minder
+git clone :https://github.com/Aoyon123/Task-Minder.git
+cd Task-Minder
 
 Backend Setup
 # Install PHP dependencies
@@ -96,12 +96,10 @@ The frontend will be available at http://localhost:5173
 php artisan test
 
 # Run specific test file
-php artisan test --filter=TaskTest
+php artisan test --filter it_can_create_a_task
 
 # Run specific test method
 php artisan test --filter=
-
-
 
 
 API Documentation
@@ -114,20 +112,105 @@ Content-Type: application/json
 {
   "name": "Fahamidul",
   "email": "fahamidul123@gmail.com",
-  "password": "password123",
-  "password_confirmation": "password123"
+  "password": "password123"
 }
+
+Success Response (201 Created):
+
+{
+  "success": true,
+  "message": "User registered successfully",
+  "data": {
+    "user": {
+      "id": 1,
+      "name": "Fahamidul",
+      "email": "fahamidul123@gmail.com",
+      "role_id": 2,
+      "email_verified_at": null,
+      "created_at": "2025-10-15T10:30:00.000000Z",
+      "updated_at": "2025-10-15T10:30:00.000000Z",
+      "role": {
+        "id": 2,
+        "name": "User",
+        "created_at": "2025-10-15T10:00:00.000000Z",
+        "updated_at": "2025-10-15T10:00:00.000000Z"
+      }
+    },
+    "token": "1|laravel_sanctum_AbCdEfGhIjKlMnOpQrStUvWxYz123456"
+  }
+}
+
 
 Login
 
 POST /api/login
 Content-Type: application/json
+Accept: application/json
 
 {
   "email": "fahamidul123@gmail.com",
   "password": "password123"
 }
 
+Success Response (200 OK):
+{
+  "success": true,
+  "message": "Login successful",
+  "data": {
+    "user": {
+      "id": 1,
+      "name": "Fahamidul",
+      "email": "fahamidul123@gmail.com",
+      "role_id": 2,
+      "email_verified_at": null,
+      "created_at": "2025-10-15T10:30:00.000000Z",
+      "updated_at": "2025-10-15T10:30:00.000000Z",
+      "role": {
+        "id": 2,
+        "name": "User",
+        "created_at": "2025-10-15T10:00:00.000000Z",
+        "updated_at": "2025-10-15T10:00:00.000000Z"
+      }
+    },
+    "token": "2|laravel_sanctum_XyZ987WvU654TsR321QpO098"
+  }
+}
+
+Get Authenticated User (Me)
+GET /api/me
+Authorization: Bearer {token}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "name": "Fahamidul",
+    "email": "fahamidul123@gmail.com",
+    "role_id": 2,
+    "email_verified_at": null,
+    "created_at": "2025-10-15T10:30:00.000000Z",
+    "updated_at": "2025-10-15T10:30:00.000000Z",
+    "role": {
+      "id": 2,
+      "name": "User",
+      "created_at": "2025-10-15T10:00:00.000000Z",
+      "updated_at": "2025-10-15T10:00:00.000000Z"
+    }
+  }
+}
+
+Logout
+POST /api/logout
+Authorization: Bearer {token}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "success": true,
+  "message": "Logged out successfully"
+}
 
 Get All Tasks
 GET /api/tasks
@@ -137,6 +220,7 @@ Create Task
 POST /api/tasks
 Authorization: Bearer {token}
 Content-Type: application/json
+Accept: application/json
 
 {
   "title": "Complete project documentation",
@@ -144,10 +228,61 @@ Content-Type: application/json
   "status": "to-do"
 }
 
+Success Response (200 OK):
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "title": "Complete project documentation",
+      "description": "Write comprehensive README file",
+      "status": "to-do",
+      "created_at": "2025-10-15T10:30:00.000000Z",
+      "updated_at": "2025-10-15T10:30:00.000000Z",
+      "user": {
+        "id": 1,
+        "name": "Fahamidul",
+        "email": "fahamidul123@gmail.com"
+      }
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "title": "Review pull requests",
+      "description": "Check pending PRs on GitHub",
+      "status": "in-progress",
+      "created_at": "2025-10-15T11:00:00.000000Z",
+      "updated_at": "2025-10-15T11:30:00.000000Z",
+      "user": {
+        "id": 1,
+        "name": "Fahamidul",
+        "email": "fahamidul123@gmail.com"
+      }
+    },
+    {
+      "id": 3,
+      "user_id": 1,
+      "title": "Deploy to production",
+      "description": "Deploy latest version to production server",
+      "status": "done",
+      "created_at": "2025-10-14T09:00:00.000000Z",
+      "updated_at": "2025-10-15T14:00:00.000000Z",
+      "user": {
+        "id": 1,
+        "name": "Fahamidul",
+        "email": "fahamidul123@gmail.com"
+      }
+    }
+  ]
+}
+
 Update Task
-PUT /api/tasks/{id}
+PUT /api/tasks/{task}
+task: Task ID (integer, required)
 Authorization: Bearer {token}
 Content-Type: application/json
+Accept: application/json
 
 {
   "title": "Updated task title",
@@ -155,11 +290,41 @@ Content-Type: application/json
   "status": "in-progress"
 }
 
+Success Response (200 OK):
+
+{
+  "success": true,
+  "message": "Task updated successfully.",
+  "data": {
+    "id": 1,
+    "user_id": 1,
+    "title": "Updated task title",
+    "description": "Updated description",
+    "status": "in-progress",
+    "created_at": "2025-10-15T10:30:00.000000Z",
+    "updated_at": "2025-10-15T16:00:00.000000Z",
+    "user": {
+      "id": 1,
+      "name": "Fahamidul",
+      "email": "fahamidul123@gmail.com"
+    }
+  }
+}
 
 Delete Task
-DELETE /api/tasks/{id}
+DELETE /api/tasks/{task}
+Headers:
 Authorization: Bearer {token}
+Content-Type: application/json
+Accept: application/json
+Example Request:
+DELETE /api/tasks/1
 
+Success Response (200 OK):
+{
+  "success": true,
+  "message": "Task deleted successfully."
+}
 
 
 
