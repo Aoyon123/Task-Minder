@@ -14,12 +14,12 @@ A full-stack task management application built with Laravel (backend) and React 
 ✅ React Toast Notifications
 ✅ PHPUnit Testing
 
-Installation & Setup
-Clone the Repository
+## ⚙️ Installation & Setup
+### Clone the Repository
 git clone :https://github.com/Aoyon123/Task-Minder.git
 cd Task-Minder
 
-Backend Setup
+## Backend Setup
 # Install PHP dependencies
 composer install
 
@@ -77,22 +77,21 @@ php artisan migrate
 # Run queue worker
 php artisan queue:work
 
-Running the Application
+## Running the Application
 
 Development Mode
-Terminal 1 - Laravel Backend:
+# Terminal 1 - Laravel Backend:
 php artisan serve
 The backend API will be available at http://localhost:8000
 
-Terminal 2 - Queue Worker:
+# Terminal 2 - Queue Worker:
 php artisan queue:work
 
-Terminal 3 - React Frontend:
+# Terminal 3 - React Frontend:
 npm run dev
 The frontend will be available at http://localhost:5173
 
- Running Tests
- # Run all tests
+ # Running Tests
 php artisan test
 
 # Run specific test file
@@ -102,7 +101,7 @@ php artisan test --filter it_can_create_a_task
 php artisan test --filter=
 
 
-API Documentation
+## API Documentation
 Authentication Endpoints
 Register User
 
@@ -141,7 +140,7 @@ Success Response (201 Created):
 }
 
 
-Login
+# Login
 
 POST /api/login
 Content-Type: application/json
@@ -176,7 +175,7 @@ Success Response (200 OK):
   }
 }
 
-Get Authenticated User (Me)
+# Get Authenticated User (Me)
 GET /api/me
 Authorization: Bearer {token}
 Content-Type: application/json
@@ -201,7 +200,7 @@ Accept: application/json
   }
 }
 
-Logout
+# Logout
 POST /api/logout
 Authorization: Bearer {token}
 Content-Type: application/json
@@ -212,11 +211,11 @@ Accept: application/json
   "message": "Logged out successfully"
 }
 
-Get All Tasks
+# Get All Tasks
 GET /api/tasks
 Authorization: Bearer {token}
 
-Create Task
+# Create Task
 POST /api/tasks
 Authorization: Bearer {token}
 Content-Type: application/json
@@ -231,7 +230,7 @@ Accept: application/json
 Success Response (200 OK):
 {
   "success": true,
-  "data": [
+  "data":
     {
       "id": 1,
       "user_id": 1,
@@ -245,39 +244,10 @@ Success Response (200 OK):
         "name": "Fahamidul",
         "email": "fahamidul123@gmail.com"
       }
-    },
-    {
-      "id": 2,
-      "user_id": 1,
-      "title": "Review pull requests",
-      "description": "Check pending PRs on GitHub",
-      "status": "in-progress",
-      "created_at": "2025-10-15T11:00:00.000000Z",
-      "updated_at": "2025-10-15T11:30:00.000000Z",
-      "user": {
-        "id": 1,
-        "name": "Fahamidul",
-        "email": "fahamidul123@gmail.com"
-      }
-    },
-    {
-      "id": 3,
-      "user_id": 1,
-      "title": "Deploy to production",
-      "description": "Deploy latest version to production server",
-      "status": "done",
-      "created_at": "2025-10-14T09:00:00.000000Z",
-      "updated_at": "2025-10-15T14:00:00.000000Z",
-      "user": {
-        "id": 1,
-        "name": "Fahamidul",
-        "email": "fahamidul123@gmail.com"
-      }
     }
-  ]
 }
 
-Update Task
+ # Update Task
 PUT /api/tasks/{task}
 task: Task ID (integer, required)
 Authorization: Bearer {token}
@@ -311,7 +281,7 @@ Success Response (200 OK):
   }
 }
 
-Delete Task
+# Delete Task
 DELETE /api/tasks/{task}
 Headers:
 Authorization: Bearer {token}
